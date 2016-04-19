@@ -17,6 +17,7 @@
             event:  'click',
             method: 'scroll'
         },
+        _carouselItems: null,
         _pages: {},
         _items: {},
         _currentPage: null,
@@ -44,6 +45,8 @@
                 .off('jcarousel:destroy', this.onDestroy)
                 .off('jcarousel:reloadend', this.onReload)
                 .off('jcarousel:scrollend', this.onScroll);
+
+            this._carouselItems = null;
         },
         _reload: function() {
             var perPage = this.options('perPage');
@@ -60,7 +63,7 @@
                 this._pages = this._calculatePages();
             } else {
                 var pp    = parseInt(perPage, 10) || 0,
-                    items = this.carousel().jcarousel('items'),
+                    items = this._getCarouselItems(),
                     page  = 1,
                     i     = 0,
                     curr;
@@ -89,7 +92,8 @@
             var self     = this,
                 carousel = this.carousel().data('jcarousel'),
                 element  = this._element,
-                item     = this.options('item');
+                item     = this.options('item'),
+                numCarouselItems = this._getCarouselItems().length;
 
             $.each(this._pages, function(page, carouselItems) {
                 var currItem = self._items[page] = $(item.call(self, page, carouselItems));
@@ -104,11 +108,11 @@
 
                         if (parseFloat(page) > parseFloat(self._currentPage)) {
                             if (newIndex < currentIndex) {
-                                target = '+=' + (carousel.items().length - currentIndex + newIndex);
+                                target = '+=' + (numCarouselItems - currentIndex + newIndex);
                             }
                         } else {
                             if (newIndex > currentIndex) {
-                                target = '-=' + (currentIndex + (carousel.items().length - newIndex));
+                                target = '-=' + (currentIndex + (numCarouselItems - newIndex));
                             }
                         }
                     }
@@ -148,19 +152,24 @@
         items: function() {
             return this._items;
         },
+        reloadCarouselItems: function() {
+            this._carouselItems = null;
+            return this;
+        },
         _clear: function() {
             this._element.empty();
             this._currentPage = null;
         },
         _calculatePages: function() {
             var carousel = this.carousel().data('jcarousel'),
-                items    = carousel.items(),
+                items    = this._getCarouselItems(),
                 clip     = carousel.clipping(),
                 wh       = 0,
                 idx      = 0,
                 page     = 1,
                 pages    = {},
-                curr;
+                curr,
+                dim;
 
             while (true) {
                 curr = items.eq(idx++);
@@ -169,21 +178,30 @@
                     break;
                 }
 
+                dim = carousel.dimension(curr);
+
+                if ((wh + dim) > clip) {
+                    page++;
+                    wh = 0;
+                }
+
+                wh += dim;
+
                 if (!pages[page]) {
                     pages[page] = curr;
                 } else {
                     pages[page] = pages[page].add(curr);
                 }
-
-                wh += carousel.dimension(curr);
-
-                if (wh >= clip) {
-                    page++;
-                    wh = 0;
-                }
             }
 
             return pages;
+        },
+        _getCarouselItems: function() {
+            if (!this._carouselItems) {
+                this._carouselItems = this.carousel().jcarousel('items');
+            }
+
+            return this._carouselItems;
         }
     });
 }(jQuery));

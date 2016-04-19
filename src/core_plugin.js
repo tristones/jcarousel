@@ -41,11 +41,11 @@
         // Protected, don't access directly
         _list:         null,
         _items:        null,
-        _target:       null,
-        _first:        null,
-        _last:         null,
-        _visible:      null,
-        _fullyvisible: null,
+        _target:       $(),
+        _first:        $(),
+        _last:         $(),
+        _visible:      $(),
+        _fullyvisible: $(),
         _init: function() {
             var self = this;
 
@@ -106,7 +106,7 @@
             this._list  = null;
             this._items = null;
 
-            var item = this._target && this.index(this._target) >= 0 ?
+            var item = this.index(this._target) >= 0 ?
                            this._target :
                            this.closest();
 
@@ -210,11 +210,12 @@
             }
 
             var wrap = this.options('wrap'),
-                end = this.items().length - 1;
+                end = this.items().length - 1,
+                check = this.options('center') ? this._target : this._last;
 
-            return end >= 0 &&
+            return end >= 0 && !this.underflow &&
                 ((wrap && wrap !== 'first') ||
-                    (this.index(this._last) < end) ||
+                    (this.index(check) < end) ||
                     (this.tail && !this.inTail)) ? true : false;
         },
         hasPrev: function() {
@@ -224,7 +225,7 @@
 
             var wrap = this.options('wrap');
 
-            return this.items().length > 0 &&
+            return this.items().length > 0 && !this.underflow &&
                 ((wrap && wrap !== 'last') ||
                     (this.index(this._first) > 0) ||
                     (this.tail && this.inTail)) ? true : false;
@@ -412,7 +413,11 @@
                 css = {};
 
             if (transitions) {
-                var backup = list.css(['transitionDuration', 'transitionTimingFunction', 'transitionProperty']),
+                var backup = {
+                        transitionDuration: list.css('transitionDuration'),
+                        transitionTimingFunction: list.css('transitionTimingFunction'),
+                        transitionProperty: list.css('transitionProperty')
+                    },
                     oldComplete = complete;
 
                 complete = function() {
@@ -751,11 +756,11 @@
         _update: function(update) {
             var self = this,
                 current = {
-                    target:       this._target || $(),
-                    first:        this._first || $(),
-                    last:         this._last || $(),
-                    visible:      this._visible || $(),
-                    fullyvisible: this._fullyvisible || $()
+                    target:       this._target,
+                    first:        this._first,
+                    last:         this._last,
+                    visible:      this._visible,
+                    fullyvisible: this._fullyvisible
                 },
                 back = this.index(update.first || current.first) < this.index(current.first),
                 key,

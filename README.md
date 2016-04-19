@@ -33,6 +33,14 @@ jCarousel comes with the following plugins:
   * [Autoscroll Plugin](http://sorgalla.com/jcarousel/docs/plugins/autoscroll/)
   * [ScrollIntoView Plugin](http://sorgalla.com/jcarousel/docs/plugins/scrollintoview/)
 
+#### Third-Party Plugins
+
+* [jcarouselSwipe](https://github.com/snake-345/jcarouselSwipe) - Adds support for user-friendly swipe gestures.
+* [jcarouselLazyLoading](https://github.com/snake-345/jcarouselLazyLoading) - Adds lazy loading to jcarousel.
+* [jcarouselFade](https://github.com/snake-345/jcarouselFade) - New method for support fade animation to jcarousel.
+* [jcarousel-status](https://github.com/fzoccara/jcarousel-status) - Display the status of your carousel.
+* [jcarousel-smoothscroll](https://github.com/aduth/jcarousel-smoothscroll) - Animates a jCarousel at a constant pace, regardless of varying item widths.
+
 Download
 --------
 
@@ -42,12 +50,14 @@ The [`jquery.jcarousel.js`](dist/jquery.jcarousel.js?raw=1) and
 [`jquery.jcarousel.min.js`](dist/jquery.jcarousel.min.js?raw=1) files contain
 the core and all plugins concenated together.
 
+All files are also available from [CDNJS](http://cdnjs.com/libraries/jcarousel).
+
 Examples
 --------
 
 You can find some example implementations in the [`examples/`](examples/)
 directory. You can also browse the [functional tests](test/functional/) to get
-an impression how to setup jCarousel.
+an impression of how to setup jCarousel.
 
 Credits
 -------
@@ -59,5 +69,5 @@ inspired by the [Carousel Component](http://billwscott.com/carousel/) by
 License
 -------
 
-Copyright (c) 2013 Jan Sorgalla.
+Copyright (c) 2006-2016 Jan Sorgalla.
 Released under the [MIT](LICENSE?raw=1) license.

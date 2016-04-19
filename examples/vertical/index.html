@@ -2,31 +2,28 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Carousel Skeleton - jCarousel Examples</title>
+        <title>Vertical carousel - jCarousel Examples</title>
+
+        <!-- Shared assets -->
+        <link rel="stylesheet" type="text/css" href="../_shared/css/style.css">
 
         <!-- Example assets -->
-        <link rel="stylesheet" type="text/css" href="jcarousel.skeleton.css">
+        <link rel="stylesheet" type="text/css" href="jcarousel.vertical.css">
 
         <script type="text/javascript" src="../../vendor/jquery/jquery.js"></script>
         <script type="text/javascript" src="../../dist/jquery.jcarousel.min.js"></script>
 
-        <script type="text/javascript" src="jcarousel.skeleton.js"></script>
+        <script type="text/javascript" src="jcarousel.vertical.js"></script>
 
     </head>
     <body>
 
         <div class="wrapper">
-            <h1>Carousel Skeleton</h1>
+            <h1>Vertical carousel</h1>
 
-            <p>This is an unstyled carousel which you can use as a foundation for implementing your own carousels.</p>
+            <p>This example shows how to setup a vartical carousel with prev/next controls and pagination.</p>
 
-            <!--
-            Mutual wrapper, encloses the carousel and the plugin elements to
-            enable auto-detection of the carousel for the plugins.
-            -->
             <div class="jcarousel-wrapper">
-
-                <!-- Carousel -->
                 <div class="jcarousel">
                     <ul>
                         <li><img src="../_shared/img/img1.jpg" width="600" height="400" alt=""></li>
@@ -38,17 +35,17 @@
                     </ul>
                 </div>
 
-                <!-- Prev/next controls -->
-                <a href="#" class="jcarousel-control-prev">&lsaquo; Prev</a>
-                <a href="#" class="jcarousel-control-next">Next &rsaquo;</a>
-
-                <!-- Pagination -->
-                <p class="jcarousel-pagination">
-                    <!-- Pagination items will be generated in here -->
+                <p class="photo-credits">
+                    Photos by <a href="http://www.mw-fotografie.de">Marc Wiegelmann</a>
                 </p>
 
+                <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+                
+                <p class="jcarousel-pagination">
+                    
+                </p>
             </div>
-
         </div>
 
     </body>

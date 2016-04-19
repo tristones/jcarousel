@@ -1,6 +1,31 @@
 jCarousel Changelog
 ===================
 
+Version 0.3.4 - 2015-09-23
+--------------------------
+
+  * Autoscroll plugin now pauses scrolling when the window or tab becomes hidden
+
+Version 0.3.3 - 2015-02-28
+--------------------------
+
+  * Fixed hasNext() for centered carousels (#746)
+  * Cleaned up .gitattributes to include package manager files
+
+Version 0.3.2 - 2015-02-23
+--------------------------
+
+  * Fixed page calculation in pagination plugin (#617)
+  * Fixed incompatibility with jQuery < 1.9 (#676)
+
+Version 0.3.1 - 2014-04-26
+--------------------------
+
+  * Fixed hasNext/hasPrev in underflow mode
+  * Fixed wrong page calculation on reload for pagination plugin (#660)
+  * Added new method `reloadCarouselItems` to pagination plugin
+  * Added component.json
+
 Version 0.3.0 - 2013-11-22
 --------------------------
 
